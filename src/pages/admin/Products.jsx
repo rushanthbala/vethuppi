@@ -1,5 +1,6 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
+import axios from "../../axios";
 
 // components here
 import Header from "../../layouts/admin/Header";
@@ -7,7 +8,29 @@ import Aside from "../../layouts/admin/Aside";
 import Footer from "../../layouts/admin/Footer";
 import ModalExample from "../../layouts/model/model";
 
-export default function products() {
+export default function Products() {
+  const [Loading, setLoading] = useState(false);
+  const [product, setProduct] = useState([]);
+  useEffect(() => {
+    console.log("==========;========");
+    const headers = {
+      "Content-Type": "application/json",
+      Authorization:
+        "bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjYzMGUwMGFlZGZkOTBkNTdlYzQ2ZjVhYSIsImlhdCI6MTY2MTg2MjIwNSwiZXhwIjoxNjYxOTQ4NjA1fQ.OeYPmKkfu1LWh8G5OcqSZ4I4rif99uomxDc3SdnIxLk",
+    };
+    axios
+      .get("/api/v1/product", { headers })
+      .then((res) => {
+        setProduct(res.data.products);
+        console.log("working", res.data.products);
+        setLoading(true);
+      })
+      .catch((error) => {
+        setLoading(true);
+        console.log("eroror", error.message);
+      });
+  }, []);
+
   return (
     <>
       <Header />
@@ -280,240 +303,60 @@ export default function products() {
                   </tr>
                 </thead>
                 <tbody>
-                  <tr>
-                    <th scope="row">1</th>
-                    <td>1111</td>
-                    <td>
-                      Lorem ipsum dolor sit amet, consectetur adipisicing elit.
-                    </td>
-                    <td>
-                      <img
-                        src="../assets/img/product-1.jpg"
-                        alt=""
-                        style={{ width: "50px", height: "auto" }}
-                      />
-                    </td>
-                    <td>90.00</td>
-                    <td>Admin1</td>
-                    <td>Active</td>
-                    <td>
-                      <button
-                        type="button"
-                        className="btn btn-success mx-2"
-                        data-bs-toggle="modal"
-                        data-bs-target="#edit-product"
-                      >
-                        Edit <i className="bi bi-pencil-square"></i>
-                      </button>
-                      <button
-                        type="button"
-                        className="btn btn-danger mx-2"
-                        data-bs-toggle="modal"
-                        data-bs-target="#delete-product"
-                      >
-                        Delete <i className="bi bi-trash"></i>
-                      </button>
-                      <Link to="product-detail" className="mx-2">
-                        <button type="button" className="btn btn-info">
-                          View Details{" "}
-                          <i className="bi bi-box-arrow-up-right"></i>
-                        </button>
-                      </Link>
-                      <Link to="/" className="mx-2">
-                        <button type="button" className="btn btn-primary">
-                          View <i className="bi bi-bag"></i>
-                        </button>
-                      </Link>
-                    </td>
-                  </tr>
-
-                  <tr>
-                    <th scope="row">1</th>
-                    <td>1111</td>
-                    <td>
-                      Lorem ipsum dolor sit amet, consectetur adipisicing elit.
-                    </td>
-                    <td>
-                      <img
-                        src="../assets/img/product-1.jpg"
-                        alt=""
-                        style={{ width: "50px", height: "auto" }}
-                      />
-                    </td>
-                    <td>90.00</td>
-                    <td>Admin1</td>
-                    <td>Active</td>
-                    <td>
-                      <button
-                        type="button"
-                        className="btn btn-success mx-2"
-                        data-bs-toggle="modal"
-                        data-bs-target="#edit-product"
-                      >
-                        Edit <i className="bi bi-pencil-square"></i>
-                      </button>
-                      <button
-                        type="button"
-                        className="btn btn-danger mx-2"
-                        data-bs-toggle="modal"
-                        data-bs-target="#delete-product"
-                      >
-                        Delete <i className="bi bi-trash"></i>
-                      </button>
-                      <Link to="product-detail" className="mx-2">
-                        <button type="button" className="btn btn-info">
-                          View Details{" "}
-                          <i className="bi bi-box-arrow-up-right"></i>
-                        </button>
-                      </Link>
-                      <Link to="/" className="mx-2">
-                        <button type="button" className="btn btn-primary">
-                          View <i className="bi bi-bag"></i>
-                        </button>
-                      </Link>
-                    </td>
-                  </tr>
-
-                  <tr>
-                    <th scope="row">1</th>
-                    <td>1111</td>
-                    <td>
-                      Lorem ipsum dolor sit amet, consectetur adipisicing elit.
-                    </td>
-                    <td>
-                      <img
-                        src="../assets/img/product-1.jpg"
-                        alt=""
-                        style={{ width: "50px", height: "auto" }}
-                      />
-                    </td>
-                    <td>90.00</td>
-                    <td>Admin1</td>
-                    <td>Active</td>
-                    <td>
-                      <button
-                        type="button"
-                        className="btn btn-success mx-2"
-                        data-bs-toggle="modal"
-                        data-bs-target="#edit-product"
-                      >
-                        Edit <i className="bi bi-pencil-square"></i>
-                      </button>
-                      <button
-                        type="button"
-                        className="btn btn-danger mx-2"
-                        data-bs-toggle="modal"
-                        data-bs-target="#delete-product"
-                      >
-                        Delete <i className="bi bi-trash"></i>
-                      </button>
-                      <Link to="product-detail" className="mx-2">
-                        <button type="button" className="btn btn-info">
-                          View Details{" "}
-                          <i className="bi bi-box-arrow-up-right"></i>
-                        </button>
-                      </Link>
-                      <Link to="/" className="mx-2">
-                        <button type="button" className="btn btn-primary">
-                          View <i className="bi bi-bag"></i>
-                        </button>
-                      </Link>
-                    </td>
-                  </tr>
-
-                  <tr>
-                    <th scope="row">1</th>
-                    <td>1111</td>
-                    <td>
-                      Lorem ipsum dolor sit amet, consectetur adipisicing elit.
-                    </td>
-                    <td>
-                      <img
-                        src="../assets/img/product-1.jpg"
-                        alt=""
-                        style={{ width: "50px", height: "auto" }}
-                      />
-                    </td>
-                    <td>90.00</td>
-                    <td>Admin1</td>
-                    <td>Active</td>
-                    <td>
-                      <button
-                        type="button"
-                        className="btn btn-success mx-2"
-                        data-bs-toggle="modal"
-                        data-bs-target="#edit-product"
-                      >
-                        Edit <i className="bi bi-pencil-square"></i>
-                      </button>
-                      <button
-                        type="button"
-                        className="btn btn-danger mx-2"
-                        data-bs-toggle="modal"
-                        data-bs-target="#delete-product"
-                      >
-                        Delete <i className="bi bi-trash"></i>
-                      </button>
-                      <Link to="product-detail" className="mx-2">
-                        <button type="button" className="btn btn-info">
-                          View Details{" "}
-                          <i className="bi bi-box-arrow-up-right"></i>
-                        </button>
-                      </Link>
-                      <Link to="/" className="mx-2">
-                        <button type="button" className="btn btn-primary">
-                          View <i className="bi bi-bag"></i>
-                        </button>
-                      </Link>
-                    </td>
-                  </tr>
-
-                  <tr>
-                    <th scope="row">1</th>
-                    <td>1111</td>
-                    <td>
-                      Lorem ipsum dolor sit amet, consectetur adipisicing elit.
-                    </td>
-                    <td>
-                      <img
-                        src="../assets/img/product-1.jpg"
-                        alt=""
-                        style={{ width: "50px", height: "auto" }}
-                      />
-                    </td>
-                    <td>90.00</td>
-                    <td>Admin1</td>
-                    <td>Active</td>
-                    <td>
-                      <button
-                        type="button"
-                        className="btn btn-success mx-2"
-                        data-bs-toggle="modal"
-                        data-bs-target="#edit-product"
-                      >
-                        Edit <i className="bi bi-pencil-square"></i>
-                      </button>
-                      <button
-                        type="button"
-                        className="btn btn-danger mx-2"
-                        data-bs-toggle="modal"
-                        data-bs-target="#delete-product"
-                      >
-                        Delete <i className="bi bi-trash"></i>
-                      </button>
-                      <Link to="product-detail" className="mx-2">
-                        <button type="button" className="btn btn-info">
-                          View Details{" "}
-                          <i className="bi bi-box-arrow-up-right"></i>
-                        </button>
-                      </Link>
-                      <Link to="/" className="mx-2">
-                        <button type="button" className="btn btn-primary">
-                          View <i className="bi bi-bag"></i>
-                        </button>
-                      </Link>
-                    </td>
-                  </tr>
+                  {product.length > 0 &&
+                    product.map((item, index) => (
+                      <tr>
+                        <th scope="row">1</th>
+                        <td key={index}>{item._id}</td>
+                        <td>{item.title}</td>
+                        <td>
+                          <img
+                            src={item.img.secure_url}
+                            alt={`vethuppi-product-${item.title}`}
+                            style={{ width: "50px", height: "auto" }}
+                          />
+                        </td>
+                        <td>{item.price}</td>
+                        <td>{item.user}</td>
+                        <td>{item.status ? "true" : "false"}</td>
+                        <td>
+                          <Link to={`edit/${item._id}`}>
+                            <button
+                              type="button"
+                              className="btn btn-success mx-2"
+                              data-bs-toggle="modal"
+                              data-bs-target="#edit-product"
+                            >
+                              Edit <i className="bi bi-pencil-square"></i>
+                            </button>
+                          </Link>
+                          <Link to={`delete/${item._id}`}>
+                            <button
+                              type="button"
+                              className="btn btn-danger mx-2"
+                              data-bs-toggle="modal"
+                              data-bs-target="#delete-product"
+                            >
+                              Delete <i className="bi bi-trash"></i>
+                            </button>
+                          </Link>
+                          <Link
+                            to={`product-detail/${item._id}`}
+                            className="mx-2"
+                          >
+                            <button type="button" className="btn btn-info">
+                              View Details{" "}
+                              <i className="bi bi-box-arrow-up-right"></i>
+                            </button>
+                          </Link>
+                          <Link to="/" className="mx-2">
+                            <button type="button" className="btn btn-primary">
+                              View <i className="bi bi-bag"></i>
+                            </button>
+                          </Link>
+                        </td>
+                      </tr>
+                    ))}
                 </tbody>
               </table>
               {/* <!-- end product detail table --> */}

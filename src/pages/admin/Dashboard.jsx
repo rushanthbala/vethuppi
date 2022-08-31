@@ -200,23 +200,29 @@ export default function Dashboard() {
                       <thead>
                         <tr>
                           <th scope="col">#</th>
+                          <th scope="col">ID</th>
                           <th scope="col">Title</th>
                           <th scope="col">Img</th>
                           <th scope="col">Description</th>
                           <th scope="col">Price</th>
                         </tr>
                       </thead>
-                      
+
                       {data.length > 0 &&
                         data.map((item, i) => (
                           <tbody>
                             <tr>
+                              <th scope="row">1</th>
                               <th scope="row">
                                 <a href="../">{item._id}</a>
                               </th>
                               <td>{item.title}</td>
                               <td>
-                                <img src="" alt="product" />
+                                <img
+                                  src={item.img.secure_url}
+                                  alt={`vethuppi-product-${item.title}`}
+                                  style={{ width: "50px", height: "auto" }}
+                                />
                               </td>
                               <td>{item.title}</td>
                               <td>
@@ -235,12 +241,10 @@ export default function Dashboard() {
               {/* <!-- end recent sales --> */}
 
               {/* <!-- start top selling --> */}
-           
+
               {/* <!-- end top selling --> */}
             </div>
             {/* <!-- end left side panel --> */}
-
-           
           </div>
           {/* <!-- end report section --> */}
         </section>
