@@ -7,9 +7,9 @@ import axios from "../../axios";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 
-export default function Example() {
+export default function EditModel({ editdata }) {
   const successmsg = () =>
-    toast("product added!", {
+    toast("product Updated!", {
       autoClose: 3000,
       closeOnClick: true,
       pauseOnHover: true,
@@ -27,13 +27,13 @@ export default function Example() {
 
   const [Loading, setLoading] = useState(false);
   const stateValues = {
-    Description: "",
-    File: "",
-    Price: "",
-    Category: "",
-    Status: "",
-    Title: "",
-    Stock: "",
+    Title: editdata ? editdata.title : "",
+    Description: editdata ? editdata.desc : "",
+    File: editdata ? editdata.File : "",
+    Price: editdata ? editdata.price : "",
+    Category: editdata ? editdata.category : "",
+    Status: editdata ? editdata.status : "",
+    Stock: editdata ? editdata.stock : "",
   };
   const [values, setValues] = useState(stateValues);
 
@@ -87,15 +87,15 @@ export default function Example() {
     console.log("posting", values);
     console.log(json, "---");
     axios
-      .post("api/v1/product/new", data, {
+      .patch("api/v1/product/" + editdata._id, data, {
         headers: {
           "Content-Type": "application/json",
         },
       })
       .then((result) => {
         successmsg();
-        setLoading(false);
         handleClose();
+        setLoading(false);
       })
       .catch((error) => {
         errsmsg();
@@ -107,15 +107,15 @@ export default function Example() {
   };
   return (
     <>
-      <Button variant="primary" onClick={handleShow}>
-        <i className="bi bi-pencil-fill"></i> Add Product
+      <Button variant="success m-1" onClick={handleShow}>
+        <i className="bi bi-pencil-fill"></i> Edit
       </Button>
 
       <Modal show={show} onHide={handleClose}>
         <Modal.Header closeButton>
           <Modal.Title>
             {" "}
-            <h5 className="modal-title">Add New Product</h5>
+            <h5 className="modal-title">Edit New Product</h5>
           </Modal.Title>
         </Modal.Header>
 
@@ -272,16 +272,16 @@ export default function Example() {
                     }}
                   />
                 ) : (
-                  "Save"
+                  "Update"
                 )}
               </button>
-              <button
+              {/* <button
                 type="reset"
                 className="btn btn-secondary"
                 onClick={Reset}
               >
                 Reset
-              </button>
+              </button> */}
             </div>
           </form>
         </div>

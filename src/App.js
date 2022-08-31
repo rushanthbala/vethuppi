@@ -7,7 +7,12 @@ import "./assets/admin/vendor/bootstrap-icons/bootstrap-icons.css";
 // admin custom css here
 import "./assets/admin/css/style.css";
 
-import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
+import {
+  BrowserRouter as Router,
+  Routes,
+  Route,
+  Navigate,
+} from "react-router-dom";
 
 // user pages
 
@@ -28,6 +33,7 @@ export default function App() {
         {/* user pages */}
 
         {/* admin pages */}
+        <Route path="/" element={<Navigate to="/admin" />} />
         <Route exact path="/admin" element={<Dashboard />} />
         <Route exact path="/admin/products" element={<Products />} />
         <Route exact path="/admin/customers" element={<Customers />} />
@@ -35,7 +41,7 @@ export default function App() {
 
         <Route
           exact
-          path="/admin/products/product-detail"
+          path="/admin/products/product-detail/:id"
           element={<ProductDetail />}
         />
         <Route
